@@ -1,0 +1,195 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:chatmessages="using:TestRouterMvvm.Models.ChatMessages"
+             xmlns:controls="using:TestRouterMvvm.Controls"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dialoghostavalonia="using:DialogHostAvalonia"
+             xmlns:local="using:TestRouterMvvm"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:TestRouterMvvm.Models"
+             xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
+             x:DataType="viewmodels:CharacterChatViewModel"
+             x:Class="TestRouterMvvm.CharacterChatView"
+             >
+    <Design.DataContext>
+		<viewmodels:CharacterChatViewModel />
+    </Design.DataContext>
+    <dialoghostavalonia:DialogHost CloseOnClickAway="True">
+		<dialoghostavalonia:DialogHost.DialogContent>
+            <ScrollViewer>
+                <local:EditCharacterView Character="{Binding CharacterChatting}" MaxWidth="500" />
+            </ScrollViewer>
+        </dialoghostavalonia:DialogHost.DialogContent>
+        <DockPanel>
+            <ScrollViewer DockPanel.Dock="Right">
+                <Grid RowDefinitions="Auto,Auto,Auto,*" ColumnDefinitions="*,*" Width="200">
+                    <Grid.Styles>
+	                    <Style Selector="Grid > StackPanel > TextBlock" >
+                            <Setter Property="FontSize" Value="12" />
+                            <Setter Property="Margin" Value="6" />
+                        </Style>
+	                    <Style Selector="Grid > StackPanel > TextBlock > Span">
+                            <Setter Property="FontSize" Value="14" />
+                            <Setter Property="FontWeight" Value="Bold" />
+                            <Setter Property="Foreground" Value="{DynamicResource InlineHeaderTextBrush}" />
+                        </Style>
+	                    <Style Selector="Grid > Button">
+                            <Setter Property="HorizontalContentAlignment" Value="Center" />
+                            <Setter Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter Property="Margin" Value="2" />
+                            <Setter Property="Padding" Value="6" />
+                            <Setter Property="FontSize" Value="11" />
+                        </Style>
+                    </Grid.Styles>
+                    <Image  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Source="{Binding CharacterChatting.Model.ImagePath}" />
+                    <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Edit Character" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=dialoghostavalonia:DialogHost}, Path=OpenDialogCommand}" />
+                    <Button Grid.Row="2" Grid.Column="0" Content="Chat Settings" />
+                    <Button Grid.Row="2" Grid.Column="1" Content="Model Settings" />
+                    <StackPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2">
+                        <TextBlock TextWrapping="Wrap">
+                            <Span>User Persona</Span><LineBreak />
+                            <Run Text="{Binding UserFormattedPersona}" />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Span>Scenario</Span><LineBreak />
+                            <Run Text="{Binding FormattedNarrative}" />
+                        </TextBlock>
+                        <TextBlock TextWrapping="Wrap">
+                            <Span>Model</Span><LineBreak />
+                            <Run Text="{Binding CurrentScenario.Model}" />
+                        </TextBlock>
+                    </StackPanel>
+                </Grid>
+            </ScrollViewer>
+		    <Border BorderBrush="Black" BorderThickness="1" DockPanel.Dock="Top">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock>
+					    <Run Text="{Binding CharacterChatting.Model.DisplayName}" BaselineAlignment="Center" />
+					    <Run Text="/" BaselineAlignment="Center" />
+                        <InlineUIContainer BaselineAlignment="Center">
+                            <ComboBox Name="scenarioComboBox" SelectedIndex="0"
+                                      MinWidth="200" MaxWidth="500" MaxDropDownHeight="300"
+                                  
+                                      ItemsSource="{Binding ScenarioList}"
+                                      SelectedValue="{Binding CurrentScenario}"
+                                      >
+                                <ComboBox.Styles>
+								    <Style Selector="Popup">
+									    <Setter Property="MaxWidth" Value="500" />
+                                    </Style>
+								    <Style Selector="ComboBoxItem Button">
+									    <Setter Property="IsEnabled" Value="True" />
+									    <Setter Property="HorizontalAlignment" Value="Stretch" />
+									    <Setter Property="VerticalAlignment" Value="Stretch" />
+                                    </Style>
+	                                <Style Selector="ComboBoxItem:selected Button, ComboBox /template/ ContentControl#ContentPresenter Grid Button, ComboBox /template/ ContentControl#ContentPresenter Grid TextBlock:nth-child(2)">
+		                                <Setter Property="IsVisible" Value="False"/>
+	                                </Style>
+                                </ComboBox.Styles>
+                                <ComboBox.DataTemplates>
+                                    <DataTemplate DataType="{x:Type models:Scenario}">
+                                        <Grid RowDefinitions="*" ColumnDefinitions="*,auto,auto" ColumnSpacing="5">
+                                            <TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding Title}" />
+                                            <TextBlock Grid.Column="1" VerticalAlignment="Center">
+                                                <InlineUIContainer BaselineAlignment="Center">
+                                                    <Image Source="{StaticResource MaterialClockOutlineIcon}"
+                                                           Width="16"
+                                                           Height="16" />
+												
+                                                </InlineUIContainer>
+                                                <Run Text="{Binding GetTimeAgoFromLastMessage}" />
+                                            </TextBlock>
+                                            <Button Grid.Column="2" VerticalAlignment="Center" Command="{Binding DeleteScenarioCommand}"
+                                                    DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
+                                                    CommandParameter="{Binding $parent.((models:Scenario)DataContext)}"
+                                                    >
+                                                <Image Source="{StaticResource MaterialTrashIcon}"
+                                                       Width="16"
+                                                       Height="16" />
+                                            </Button>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ComboBox.DataTemplates>
+                            </ComboBox>
+                        </InlineUIContainer>
+                        <InlineUIContainer BaselineAlignment="Center">
+                            <Button Content="New" 
+                                    Command="{Binding CopyScenarioCommand}"
+                                    CommandParameter="{Binding CurrentScenario}"
+                                    />
+                        </InlineUIContainer>
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+            <TextBox Height="20"
+                     DockPanel.Dock="Bottom"
+                     Text="{Binding NextMessage}"
+                     KeyDown="TextBox_KeyDown" />
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding ChatHistory}">
+                    <ItemsControl.Styles>
+				        <Style Selector="Grid">
+                            <Setter Property="ColumnSpacing" Value="3" />
+                            <Setter Property="Margin" Value="4" />
+                        </Style>
+				        <Style Selector="Grid > :is(Border)">
+                            <Setter Property="CornerRadius" Value="10" />
+                            <Setter Property="BorderThickness" Value="1" />
+                            <Setter Property="BorderBrush" Value="Black" />
+                            <Setter Property="ClipToBounds" Value="True" />
+                            <Setter Property="Background" Value="{DynamicResource ChatBubbleBackgroundBrush}" />
+                        </Style>
+				        <Style Selector="Grid > :is(Border) > :is(TextBlock)">
+                            <Setter Property="Margin" Value="10"/>
+                            <Setter Property="TextWrapping" Value="Wrap" />
+                        </Style>
+                    </ItemsControl.Styles>
+			        <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+				            <StackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.DataTemplates>
+				        <DataTemplate DataType="{x:Type chatmessages:ChatMessage}">
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="32,*,32">
+					            <Border Grid.Row="0" Grid.Column="2" Grid.RowSpan="2"
+                                        VerticalAlignment="Top">
+                                    <Image
+                                           DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
+                                           Source="{Binding UserChatting.Image}" />
+                                </Border>
+                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                           DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
+                                           Text="{Binding UserChatting.Name}" />
+                                <Border Grid.Row="1" Grid.Column="1">
+                                    <SelectableTextBlock
+                                               DataContext="{Binding $parent[Grid].((chatmessages:ChatMessage)DataContext)}"
+                                               Text="{Binding Text}" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+				        <DataTemplate DataType="{x:Type chatmessages:AIChatMessage}">
+                            <Grid RowDefinitions="auto,*" ColumnDefinitions="32,*,32">
+                                <Border Grid.Row="0" Grid.Column="0" Grid.RowSpan="2"
+                                        VerticalAlignment="Top">
+					                <Image 
+                                           DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
+                                           Source="{Binding CharacterChatting.Model.ImagePath}" />
+                                </Border>
+                                <TextBlock Grid.Row="0" Grid.Column="1"
+                                           DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
+                                           Text="{Binding CharacterChatting.Model.Name}" />
+                                <Border Grid.Row="1" Grid.Column="1">
+                                    <SelectableTextBlock 
+                                               DataContext="{Binding $parent[Grid].((chatmessages:AIChatMessage)DataContext)}"
+                                               Text="{Binding Outputs[0].Text}" />
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.DataTemplates>
+                </ItemsControl>
+            </ScrollViewer>
+        </DockPanel>
+    </dialoghostavalonia:DialogHost>
+</UserControl>

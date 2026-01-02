@@ -1,0 +1,78 @@
+<reactiveui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
+                                x:TypeArguments="viewmodels:EditCharacterViewModel"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:TestRouterMvvm"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:TestRouterMvvm.Models"
+             xmlns:reactiveui="http://reactiveui.net/"
+             xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewmodels:EditCharacterViewModel"
+             x:Class="TestRouterMvvm.EditCharacterView">
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <viewmodels:EditCharacterViewModel />
+    </Design.DataContext>
+    <UserControl.Styles>
+		<Style Selector="TextBox, TextBlock, SelectableTextBlock, Button">
+            <Setter Property="Margin" Value="10,0,10,10"/>
+        </Style>
+		<Style Selector="DockPanel Button">
+            <Setter Property="Margin" Value="0,0,10,10"/>
+        </Style>
+		<Style Selector="StackPanel > TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+		<Style Selector="StackPanel > TextBlock:nth-child(1)">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </UserControl.Styles>
+    <UserControl.DataTemplates>
+		<DataTemplate DataType="{x:Type viewmodels:CharacterViewModel}">
+            <StackPanel>
+		        <TextBlock Text="Edit Character View" />
+                <TextBlock Text="Character Display Name:" />
+                <TextBox Text="{Binding Model.DisplayName}" />
+                <TextBlock Text="Character Name:" />
+                <TextBox Text="{Binding Model.Name}" />
+                <TextBlock Text="Character Persona:" />
+                <TextBox Text="{Binding Model.Persona}" AcceptsReturn="True" TextWrapping="WrapWithOverflow" />
+                <TextBlock>
+                    <Run Text="Mature Content?" BaselineAlignment="Center" FontSize="14"/>
+                    <InlineUIContainer>
+						<CheckBox IsChecked="{Binding Model.IsMature}" Margin="5,0,0,0"/>
+                    </InlineUIContainer>
+                </TextBlock>
+                <!--<TextBlock Text="Voice Preset:" FontSize="14" />-->
+                <TextBlock Text="Lorebooks:" />
+                <!--<TextBox Text="{Binding Lorebook}" Margin="0,0,0,10"/>-->
+                <ItemsControl ItemsSource="{Binding Model.Lorebook}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <DockPanel LastChildFill="True">
+                                    <Button DockPanel.Dock="Right" VerticalAlignment="Center">
+                                        <Image Source="{StaticResource MaterialTrashIcon}"
+                                                       Width="16"
+                                                       Height="16" />
+                                    </Button>
+                                    <TextBox Text="{Binding Key}" />
+                                </DockPanel>
+                                <TextBox Text="{Binding Value}" AcceptsReturn="True" TextWrapping="WrapWithOverflow" Height="80"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <Button Content="Add Lorebook" Command="{Binding AddLorebookCommand}" Width="120" />
+                <!--<Button Content="Save" Command="{Binding SaveCommand}" Width="100"/>-->
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.DataTemplates>
+    <UserControl.Template>
+        <ControlTemplate TargetType="local:EditCharacterView">
+            <ContentControl Content="{TemplateBinding Character}"></ContentControl>
+        </ControlTemplate>
+    </UserControl.Template>
+</reactiveui:ReactiveUserControl>

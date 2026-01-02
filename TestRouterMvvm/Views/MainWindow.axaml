@@ -1,0 +1,70 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:app="clr-namespace:TestRouterMvvm"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:TestRouterMvvm.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="TestRouterMvvm.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="TestRouterMvvm">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel LastChildFill="True">
+
+        <Border DockPanel.Dock="Top" Height="50" Background="LightGray">
+            <TextBlock Text="Header" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </Border>
+        <Border BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5">
+            <StackPanel DockPanel.Dock="Left"  Width="200">
+                <DockPanel LastChildFill="False">
+				    <TextBlock Text="Menu" VerticalAlignment="Center" DockPanel.Dock="Left" Margin="8,10"/>
+				    <Button Content="Next" VerticalAlignment="Center" DockPanel.Dock="Right" Margin="8,10" Command="{Binding GoNext}" />
+				    <Button Content="Back" VerticalAlignment="Center" DockPanel.Dock="Right" Margin="8,10" Command="{Binding GoBack}" />
+                </DockPanel>
+                <TabStrip  ItemsSource="{Binding MyTabs}" SelectedItem="{Binding SelectedTab}">
+                    <TabStrip.Styles>
+                        <Style Selector="TabStrip > :is(TabStripItem)">
+                            <Setter Property="Margin" Value="-5"/>
+                            <Setter Property="FontSize" Value="16"/>
+                        </Style>
+                    </TabStrip.Styles>
+                    <TabStrip.ItemTemplate>
+                        <DataTemplate x:DataType="vm:MainTabsViewModel">
+                            <TextBlock Text="{Binding Header}"/>
+                        </DataTemplate>
+                    </TabStrip.ItemTemplate>
+                </TabStrip>
+            </StackPanel>
+        </Border>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderBrush="Black" BorderThickness="1" CornerRadius="5" Margin="5">
+                <TextBlock Text="{Binding Router.CurrentViewModel^.UrlPathSegment}" Margin="15"/>
+            </Border>
+            <rxui:RoutedViewHost HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Row="1" Router="{Binding Router}">
+                <rxui:RoutedViewHost.DefaultContent>
+                    <TextBlock Text="Default content"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                </rxui:RoutedViewHost.DefaultContent>
+                <!--<rxui:RoutedViewHost.ViewLocator>
+                    --><!-- See AppViewLocator.cs section below --><!--
+                    --><!--<app:AppViewLocator />--><!--
+                </rxui:RoutedViewHost.ViewLocator>-->
+            </rxui:RoutedViewHost>
+            <TextBlock Grid.Row="2" Margin="15" Text="{Binding Router.NavigationStack.Count}" />
+        </Grid>
+    </DockPanel>
+</Window>

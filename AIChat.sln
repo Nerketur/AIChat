@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36623.8
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRouting", "TestRouting\TestRouting.csproj", "{E7C5720E-2993-47F1-904D-B43D2FE35E26}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestRouterMvvm", "TestRouterMvvm\TestRouterMvvm.csproj", "{BFFAB448-806B-48D7-930C-17D684111E5A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E7C5720E-2993-47F1-904D-B43D2FE35E26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E7C5720E-2993-47F1-904D-B43D2FE35E26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E7C5720E-2993-47F1-904D-B43D2FE35E26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E7C5720E-2993-47F1-904D-B43D2FE35E26}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFFAB448-806B-48D7-930C-17D684111E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFFAB448-806B-48D7-930C-17D684111E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFFAB448-806B-48D7-930C-17D684111E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFFAB448-806B-48D7-930C-17D684111E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE1964E3-D044-48D0-849F-84C526DE30F0}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,29 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key='Light'>
+            <SolidColorBrush x:Key='BackgroundBrush'>White</SolidColorBrush>
+            <SolidColorBrush x:Key='ForegroundBrush'>Black</SolidColorBrush>
+            <SolidColorBrush x:Key='InlineHeaderTextBrush'>LightGray</SolidColorBrush>
+            <SolidColorBrush x:Key='ChatBubbleBackgroundBrush'>#DDD</SolidColorBrush>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key='Dark'>
+            <SolidColorBrush x:Key='BackgroundBrush'>Black</SolidColorBrush>
+            <SolidColorBrush x:Key='ForegroundBrush'>White</SolidColorBrush>
+            <SolidColorBrush x:Key='InlineHeaderTextBrush'>DarkGray</SolidColorBrush>
+            <SolidColorBrush x:Key='ChatBubbleBackgroundBrush'>#333</SolidColorBrush>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+    <!-- Add Resources Here -->
+    <DrawingImage x:Key="MaterialTrashIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="{DynamicResource ForegroundBrush}" Geometry="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+    <DrawingImage x:Key="MaterialClockOutlineIcon">
+        <DrawingImage.Drawing>
+            <GeometryDrawing Brush="{DynamicResource ForegroundBrush}" Geometry="M12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22C6.47,22 2,17.5 2,12A10,10 0 0,1 12,2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z" />
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+</ResourceDictionary>

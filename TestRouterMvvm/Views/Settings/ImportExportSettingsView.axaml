@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:rxui="http://reactiveui.net"
+             xmlns:settings="using:TestRouterMvvm.ViewModels.Settings"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="settings:ImportExportSettingsViewModel"
+             x:Class="TestRouterMvvm.Views.Settings.ImportExportSettingsView">
+        <StackPanel Margin="10">
+            <TextBlock Text="Character Import/Export" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" />
+            <TextBlock TextWrapping="Wrap" Text="Import &amp; export characters to &amp; from the app. Characters and Chats will be exported as .byaf files.
+    You can read more about the open source BYAF format on Github." Margin="0,0,0,20" />
+        
+            <TextBlock Text="Bullk Export" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" />
+            <TextBlock TextWrapping="Wrap" Text="Export all of your characters as .byaf files at once with or without their chats included in the .byaf files.
+    You can export a single character by right clicking it in the Home tab and selecting export." Margin="0,0,0,10" />
+            <RadioButton GroupName="Chat" Name="IncludeChats" Content="Include chats" Width="150"/>
+            <RadioButton GroupName="Chat" Name="ExcludeChats" Content="Exclude chats" Width="150"/>
+            <Button Command="{Binding DoExport}" Content="Export" Margin="0,0,0,20"/>
+        
+            <TextBlock Text="Import your data" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" />
+            <TextBlock TextWrapping="Wrap" Text="Import characters and chats from a .byaf file. You may select more than one file to import." Margin="0,0,0,10" />
+            <Button Command="{Binding DoImport}" Content="Import" Margin="0,0,0,10"/>
+        </StackPanel>
+</UserControl>

@@ -1,0 +1,35 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:TestRouterMvvm.Models"
+             xmlns:testroutermvvm="using:TestRouterMvvm.Views"
+             xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="viewmodels:HomepageViewModel"
+             x:Class="TestRouterMvvm.Views.HomepageView">
+        <Design.DataContext>
+            <!-- This only sets the DataContext for the previewer in an IDE,
+                 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+            <viewmodels:HomepageViewModel/>
+        </Design.DataContext>
+        <ScrollViewer>
+            <ItemsControl ItemsSource="{Binding CharacterList}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type viewmodels:CharacterCardViewModel}">
+                        <Border BorderBrush="Black" ClipToBounds="True" CornerRadius="10" BorderThickness="1" MinWidth="100" Width="175" MaxWidth="300" MinHeight="200" Height="300" Margin="10">
+                            <StackPanel PointerPressed="StackPanel_PointerPressed">
+                                <Image Height="225" Stretch="UniformToFill" Source="{Binding Character.Model.ImagePath}" />
+                                <TextBlock Text="{Binding Character.Model.DisplayName}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </UserControl>
