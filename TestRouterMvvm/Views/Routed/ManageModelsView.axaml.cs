@@ -5,10 +5,10 @@ using ReactiveUI;
 using ReactiveUI.Avalonia;
 using TestRouterMvvm.ViewModels;
 
-namespace TestRouterMvvm.Views;
+namespace TestRouterMvvm.Views.Routed;
 
-public partial class CreateCharacterView : ReactiveUserControl<CreateCharacterViewModel> {
-    public CreateCharacterView() {
+public partial class ManageModelsView : ReactiveUserControl<ManageModelsViewModel> {
+    public ManageModelsView() {
         this.WhenActivated(disposables => { });
         AvaloniaXamlLoader.Load(this);
     }

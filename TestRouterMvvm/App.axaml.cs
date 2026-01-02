@@ -4,12 +4,9 @@ using Avalonia.Markup.Xaml;
 using Microsoft.Extensions.DependencyInjection;
 using ReactiveUI;
 using Splat;
-using Splat.Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reactive.Concurrency;
-using TestRouterMvvm.Extensions;
 using TestRouterMvvm.ViewModels;
 using TestRouterMvvm.Views;
 

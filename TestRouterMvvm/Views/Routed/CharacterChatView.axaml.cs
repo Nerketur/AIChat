@@ -1,7 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using Avalonia.Media;
 using Avalonia.Styling;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
@@ -10,11 +9,9 @@ using TestRouterMvvm.ViewModels;
 
 using System;
 using System.Reactive.Linq;
-using System.Reactive.Disposables;
-using System.Diagnostics;
 using System.Linq;
 
-namespace TestRouterMvvm;
+namespace TestRouterMvvm.Views.Routed;
 
 public partial class CharacterChatView : ReactiveUserControl<CharacterChatViewModel> {
     public ComboBox? ScenarioComboBox => this.FindControl<ComboBox>("scenarioComboBox");

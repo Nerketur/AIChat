@@ -8,9 +8,8 @@ using System;
 using System.Reactive.Disposables.Fluent;
 using TestRouterMvvm.Models;
 using TestRouterMvvm.ViewModels;
-using TestRouterMvvm.Views;
 
-namespace TestRouterMvvm;
+namespace TestRouterMvvm.Views;
 
 public partial class EditCharacterView : ReactiveUserControl<EditCharacterViewModel> {
 

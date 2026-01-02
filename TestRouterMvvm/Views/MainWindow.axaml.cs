@@ -2,7 +2,6 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
 using ReactiveUI.Avalonia;
-using System.Collections.Generic;
 using TestRouterMvvm.ViewModels;
 
 namespace TestRouterMvvm.Views {

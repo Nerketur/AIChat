@@ -5,7 +5,7 @@
              xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewmodels:ManageModelsViewModel"
-             x:Class="TestRouterMvvm.Views.ManageModelsView">
+             x:Class="TestRouterMvvm.Views.Routed.ManageModelsView">
         <TabStrip>
             <TabItem Header="Downloaded Models" />
             <TabItem Header="Available Models" />

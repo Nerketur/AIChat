@@ -6,6 +6,7 @@
              xmlns:vmsettings="using:TestRouterMvvm.ViewModels.Settings"
              xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
              xmlns:views="using:TestRouterMvvm.Views"
+             xmlns:routedviews="using:TestRouterMvvm.Views.Routed"
              xmlns:dialogHostAvalonia="clr-namespace:DialogHostAvalonia;assembly=DialogHost.Avalonia"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
@@ -13,7 +14,7 @@
     <Application.DataTemplates>
         <!--<local:ViewLocator/>-->
         <DataTemplate DataType="{x:Type viewmodels:HomepageViewModel}">
-            <views:HomepageView />
+            <routedviews:HomepageView />
         </DataTemplate>
         <DataTemplate DataType="{x:Type vmsettings:ImportExportSettingsViewModel}">
             <settings:ImportExportSettingsView />

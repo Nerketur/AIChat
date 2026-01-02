@@ -5,7 +5,7 @@
              xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="viewmodels:CreateCharacterViewModel"
-             x:Class="TestRouterMvvm.Views.CreateCharacterView">
+             x:Class="TestRouterMvvm.Views.Routed.CreateCharacterView">
         <TabStrip>
             <TabItem Header="Character" />
             <TabItem Header="Model" />

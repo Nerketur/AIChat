@@ -21,20 +21,15 @@ using TestRouterMvvm.Views;
 using TestRouterMvvm.Views.Settings;
 
 namespace TestRouterMvvm.ViewModels.Settings {
-    public class ImportExportSettingsViewModel : ViewModelBase {
-        public ImportExportSettingsViewModel(IFileDialogService fileDialogService) {
-            FileDialogService = fileDialogService;
-            //DoExport = ReactiveCommand.Create(ExportButton_Click, Observable.Start(() => true));
-        }
-
-        public ImportExportSettingsViewModel() : this(null!) { }
+    public class ImportExportSettingsViewModel(IFileDialogService fileDialogService) : ViewModelBase {
+        //public ImportExportSettingsViewModel() : this(null!) { }
 
         public static string DisplayName { get; } = "Import/Export";
 
-        public IFileDialogService FileDialogService { get; set; }
+        public IFileDialogService FileDialogService { get; set; } = fileDialogService;
 
         public ReactiveCommand<Unit, Unit> DoImport => ReactiveCommand.CreateFromTask(ImportButton_Click, outputScheduler: RxSchedulers.MainThreadScheduler);
-        public ReactiveCommand<Unit, Unit> DoExport { get; set; } = ReactiveCommand.Create(() => { });
+        public ReactiveCommand<Unit, Unit> DoExport => ReactiveCommand.Create(() => { });
 
         //public ReactiveCommand<Unit, Unit> Command { get; } = new ReactiveCommand(() => { });
         private async Task ImportButton_Click() {

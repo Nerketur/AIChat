@@ -26,7 +26,6 @@ namespace TestRouterMvvm {
             switch (param) {
                 case ImportExportSettingsViewModel viewModel:
                     return new ImportExportSettingsView() { DataContext = viewModel };
-                    //return new ImportExportSettingsView(new FileDialogService(ServiceProvider.GetRequiredService<MainWindow>())) { DataContext = viewModel };
                 case null:
                     return null;
             }

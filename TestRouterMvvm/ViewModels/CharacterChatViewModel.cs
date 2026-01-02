@@ -1,13 +1,9 @@
-﻿using Avalonia.Threading;
-using DynamicData;
-using ReactiveUI;
+﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TestRouterMvvm.Models;
 using TestRouterMvvm.Models.ChatMessages;
 
@@ -51,10 +47,12 @@ namespace TestRouterMvvm.ViewModels {
             get => _scenarioList;
             set => this.RaiseAndSetIfChanged(ref _scenarioList, value);
         }
-        //public IObservable<bool> GetCountIsGreaterThan0 { get => this.WhenAnyValue(
-        //            x => x.ScenarioList,
-        //            (scenarioList) => scenarioList.Count > 0
-        //        ).ObserveOn(RxApp.MainThreadScheduler); }
+        public IObservable<bool> GetCountIsGreaterThan0 {
+            get => this.WhenAnyValue(
+                    x => x.ScenarioList,
+                    (scenarioList) => scenarioList.Count > 0
+                ).ObserveOn(RxApp.MainThreadScheduler);
+        }
         public AIModel ModelUsed { get; set; } = new AIModel() { Name = "Jeff" };
 
         public string? UrlPathSegment => "Chat";
@@ -73,40 +71,32 @@ namespace TestRouterMvvm.ViewModels {
                     }];
                     NextMessage = string.Empty;
                 }
-            },
-            outputScheduler: RxApp.MainThreadScheduler);
+            });
 
         public ReactiveCommand<Scenario, Unit> DeleteScenarioCommand
             => ReactiveCommand.Create<Scenario>(
                 (scenario) => {
-                    Dispatcher.UIThread.Invoke(() => {
-                        if (ScenarioList.Count > 1 && ScenarioList.Contains(scenario)) {
-                            var newList = ScenarioList.Where(s => s != scenario).ToList();
-                            ScenarioList = newList;
-                            if (CurrentScenario == scenario) {
-                                CurrentScenario = ScenarioList.First();
-                            }
+                    if (ScenarioList.Count > 1 && ScenarioList.Contains(scenario)) {
+                        var newList = ScenarioList.Where(s => s != scenario).ToList();
+                        ScenarioList = newList;
+                        if (CurrentScenario == scenario) {
+                            CurrentScenario = ScenarioList.First();
                         }
-                    });
-                },//,
-                //canExecute: this.WhenAnyValue(
-                //    x => x.ScenarioList,
-                //    (scenarioList) => scenarioList.Count > 1
-                //).ObserveOn(RxApp.MainThreadScheduler)
-                outputScheduler: RxApp.MainThreadScheduler
+                    }
+                },
+                canExecute: this.WhenAnyValue(
+                    x => x.ScenarioList,
+                    (scenarioList) => scenarioList.Count > 1
+                ).ObserveOn(RxApp.MainThreadScheduler)
             );
         public ReactiveCommand<Scenario, Unit> CopyScenarioCommand
             => ReactiveCommand.Create<Scenario>(
                 (scenario) => {
-                    //do nothing
-                    //Dispatcher.UIThread.Invoke(() => {
-                    //    var newList = ScenarioList.Append(scenario.ShallowCopyNoMessages()).ToList();
-                    //    ScenarioList = newList;
-                    //    CurrentScenario = ScenarioList.Last();
-                    //});
-                },//,
-                //canExecute: GetCountIsGreaterThan0
-                outputScheduler: RxApp.MainThreadScheduler
+                    var newList = ScenarioList.Append(scenario.ShallowCopyNoMessages()).ToList();
+                    ScenarioList = newList;
+                    CurrentScenario = ScenarioList.Last();
+                },
+                canExecute: GetCountIsGreaterThan0
             );
     }
 }

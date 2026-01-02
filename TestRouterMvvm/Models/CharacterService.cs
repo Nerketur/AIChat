@@ -1,6 +1,5 @@
 ﻿using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using TestRouterMvvm.Data;
@@ -174,9 +173,6 @@ namespace TestRouterMvvm.Models {
                         TopP = scenario.TopP,
                         Grammar = scenario.Grammar,
                         Messages = scenario.Messages,
-                        //Messages = scenario.Messages is List<IChatMessage> msgs
-                        //            ? [.. msgs.Select(GetDatabaseText).Select(msg => ReplaceSpeakers(msg, UserPersona.Default.Name, dbCharacter.Name))]
-                        //            : [],
                         Title = scenario.Title,
                     };
                     dbScenario.ExampleMessages = scenario.ExampleMessages is List<IChatMessage> ems
@@ -186,14 +182,6 @@ namespace TestRouterMvvm.Models {
                     context.Scenarios.Add(dbScenario);
                     context.SaveChanges();
                 }
-                //context.Characters.Add(dbCharacter);
-                //context.SaveChanges();
-
-                //foreach (var item in efKeyValues) {
-                //    context.KeyValuePairs.Add(item);
-                //}
-                
-                //context.SaveChanges();
                 context.SaveChanges();
             }
         }

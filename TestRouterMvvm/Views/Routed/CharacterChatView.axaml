@@ -8,9 +8,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="using:TestRouterMvvm.Models"
              xmlns:viewmodels="using:TestRouterMvvm.ViewModels"
+             xmlns:views="using:TestRouterMvvm.Views"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="400"
              x:DataType="viewmodels:CharacterChatViewModel"
-             x:Class="TestRouterMvvm.CharacterChatView"
+             x:Class="TestRouterMvvm.Views.Routed.CharacterChatView"
              >
     <Design.DataContext>
 		<viewmodels:CharacterChatViewModel />
@@ -18,7 +19,7 @@
     <dialoghostavalonia:DialogHost CloseOnClickAway="True">
 		<dialoghostavalonia:DialogHost.DialogContent>
             <ScrollViewer>
-                <local:EditCharacterView Character="{Binding CharacterChatting}" MaxWidth="500" />
+                <views:EditCharacterView Character="{Binding CharacterChatting}" MaxWidth="500" />
             </ScrollViewer>
         </dialoghostavalonia:DialogHost.DialogContent>
         <DockPanel>
@@ -100,9 +101,9 @@
                                                 </InlineUIContainer>
                                                 <Run Text="{Binding GetTimeAgoFromLastMessage}" />
                                             </TextBlock>
-                                            <Button Grid.Column="2" VerticalAlignment="Center" Command="{Binding DeleteScenarioCommand}"
-                                                    DataContext="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext)}"
-                                                    CommandParameter="{Binding $parent.((models:Scenario)DataContext)}"
+                                            <Button Grid.Column="2" VerticalAlignment="Center"
+                                                    Command="{Binding $parent[UserControl].((viewmodels:CharacterChatViewModel)DataContext).DeleteScenarioCommand}"
+                                                    CommandParameter="{Binding}"
                                                     >
                                                 <Image Source="{StaticResource MaterialTrashIcon}"
                                                        Width="16"
@@ -164,7 +165,6 @@
                                            Text="{Binding UserChatting.Name}" />
                                 <Border Grid.Row="1" Grid.Column="1">
                                     <SelectableTextBlock
-                                               DataContext="{Binding $parent[Grid].((chatmessages:ChatMessage)DataContext)}"
                                                Text="{Binding Text}" />
                                 </Border>
                             </Grid>
@@ -182,7 +182,6 @@
                                            Text="{Binding CharacterChatting.Model.Name}" />
                                 <Border Grid.Row="1" Grid.Column="1">
                                     <SelectableTextBlock 
-                                               DataContext="{Binding $parent[Grid].((chatmessages:AIChatMessage)DataContext)}"
                                                Text="{Binding Outputs[0].Text}" />
                                 </Border>
                             </Grid>

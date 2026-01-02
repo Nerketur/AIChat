@@ -31,6 +31,8 @@ namespace TestRouterMvvm.ViewModels {
         ];
 
         public ImportExportSettingsViewModel Tab1VM => Dispatcher.UIThread.Invoke<ImportExportSettingsViewModel>(() => new(fileDialogService));
+        public AdvancedSettingsViewModel Tab2VM => new();
+        internal GeneralSettingsViewModel Tab3VM => new();
 
         public string? UrlPathSegment { get; } = DisplayName;
         public IScreen HostScreen => screen;

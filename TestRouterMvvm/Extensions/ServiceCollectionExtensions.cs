@@ -10,6 +10,7 @@ using TestRouterMvvm.Services;
 using TestRouterMvvm.ViewModels;
 using TestRouterMvvm.ViewModels.Settings;
 using TestRouterMvvm.Views;
+using TestRouterMvvm.Views.Routed;
 using TestRouterMvvm.Views.Settings;
 
 namespace TestRouterMvvm.Extensions {
@@ -18,11 +19,11 @@ namespace TestRouterMvvm.Extensions {
             //collection.AddSingleton<IRepository, Repository>();
             //collection.AddScoped<IFileDialogService>((sp) => new FileDialogService());
             collection.AddTransient<MainWindowViewModel>();
-            collection.AddSingleton<HomepageView>();
+            //collection.AddSingleton<HomepageView>();
             collection.AddTransient<HomepageViewModel>();
-            collection.AddSingleton<ImportExportSettingsView>();
+            //collection.AddSingleton<ImportExportSettingsView>();
             collection.AddTransient<ImportExportSettingsViewModel>();
-            collection.AddSingleton<SettingsView>();
+            //collection.AddSingleton<SettingsView>();
             collection.AddSingleton<SettingsViewModel>();
             collection.AddSingleton<SettingsTabsViewModel>();
             collection.AddSingleton<IViewLocator>((sp) => new AppViewLocator(sp));
