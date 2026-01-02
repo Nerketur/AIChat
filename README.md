@@ -4,7 +4,7 @@ This project is intended to become a full parity-complete replacement for the BY
 
 Current state of BYAI can be found at https://backyard.ai/
 
-Right now, the code in TestingMVVM is the current state of the app, intended to potentially be called AIChat.
+Right now, the code in TestRouterMVVM is the current state of the app, intended to potentially be called AIChat.
 
 ## Current Features
 - Can import BYAF files
