@@ -1,23 +1,19 @@
-﻿using Avalonia.Controls;
-using Avalonia.Media.Imaging;
+﻿using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Platform.Storage;
-using Avalonia.Threading;
 using ReactiveUI;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using TestRouterMvvm.Exceptions;
 using TestRouterMvvm.Models;
 using TestRouterMvvm.Models.BYAFRelated;
 using TestRouterMvvm.Models.ChatMessages;
 using TestRouterMvvm.Models.JsonPOJOs;
 using TestRouterMvvm.Services;
-using TestRouterMvvm.Views;
 using TestRouterMvvm.Views.Settings;
 
 namespace TestRouterMvvm.ViewModels.Settings {
@@ -93,7 +89,7 @@ namespace TestRouterMvvm.ViewModels.Settings {
                     "CommandR" => BYAIPromptTemplate.CommandR,
                     "MistralInstruct" => BYAIPromptTemplate.MistralInstruct,
                     null => BYAIPromptTemplate.None,
-                    _ => throw new UnsupportedPromptType($"Prompt type of {sc.PromptTemplate} is unsupported!")
+                    _ => throw new UnsupportedPromptTypeException($"Prompt type of {sc.PromptTemplate} is unsupported!")
                 },
                 Messages = [.. sc.Messages.Select<BYAFChatMessage, IChatMessage>(msg => msg switch {
                     BYAFAIChatMessage aimsg => new AIChatMessage() {
@@ -111,7 +107,7 @@ namespace TestRouterMvvm.ViewModels.Settings {
                         Text = umsg.Text,
                         UpdatedAt = umsg.UpdatedAt
                     },
-                    _ => throw new UnsupportedChatMessageType($"Chat message type {msg.GetType()} not supported")
+                    _ => throw new UnsupportedChatMessageTypeException($"Chat message type {msg.GetType()} not supported")
                 })],
                 BackgroundImage = null
             })];

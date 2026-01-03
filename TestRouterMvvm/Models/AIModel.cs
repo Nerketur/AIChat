@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TestRouterMvvm.Models.Database;
+﻿using TestRouterMvvm.Models.Database;
 
 namespace TestRouterMvvm.Models {
     public enum AIModelSource {

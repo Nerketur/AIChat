@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace TestRouterMvvm.Models.Database {
+﻿namespace TestRouterMvvm.Models.Database {
     internal class EFKeyValuePair<TKey, TValue> {
         public int Id { get; set; }
         public TKey Key { get; set; }
